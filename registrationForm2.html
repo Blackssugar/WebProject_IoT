@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Registration Page</title>
+	
+</head>
+	
+<body>
+  <form action="./php/register.php" method="post" onsubmit="return checkall();">
+	<h1>Registration Form</h1>
+	First name:<br>
+	<input type="text" name="firstname" required>
+	<br>
+	Last name:<br>
+	<input type="text" name="lastname" required>
+	<br>
+	Email:<br>
+	<input type="text" name="email" id="email"  required>
+	<span id="email_status"></span>
+	<br>
+	Username:<br>
+	<input type="text" name="username" id="username"  required>
+	<span id="name_status"></span>
+	<br>
+	Password:<br>
+	<input type="password" name="password" id="password" required>
+	<br>
+	Confirm Password:<br>
+	<input type="password" name="cpassword" id="cpassword" required>
+	<br>
+	<input type="submit" value="Submit">
+	</form>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/registerValidate.js"></script>
+</body>
+	
+
+</html>	

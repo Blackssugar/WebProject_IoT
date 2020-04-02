@@ -1,0 +1,50 @@
+<?php
+require 'loginDB.php';
+try {
+
+    if(isset($_POST['user_name']))
+		{
+			$name=$_POST['user_name'];
+
+			$checkdata=" SELECT * FROM members WHERE username='$name' ";
+
+			$results = mysqli_query($db, $checkdata);
+			$num_rows = mysqli_num_rows($results);	
+
+			if($num_rows > 0)
+			{
+			echo "User Name Already Exist";
+			}
+			else
+			{
+			echo "OK";
+			}
+			exit();
+			}
+
+			if(isset($_POST['user_email']))
+			{
+			$emailId=$_POST['user_email'];
+
+			$checkdata=" SELECT * FROM members WHERE email='$emailId' ";
+
+			$results = mysqli_query($db, $checkdata);
+			$num_rows = mysqli_num_rows($results);	
+
+			if($num_rows>0)
+			{
+			echo "Email Already Exist";
+			}
+			else
+			{
+			echo "OK";
+			}
+			exit();
+		}
+    }
+catch(Exception $e)
+    {
+    echo "Error: " . $e->getMessage();
+    }
+mysqli_close($db);
+?>

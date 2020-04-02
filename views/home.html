@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+	<html lang="en" >
+	
+	<head>
+	
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <meta name="description" content="">
+	  <meta name="author" content="">
+	
+	  <title>Home</title>
+	
+	  <!-- Bootstrap core CSS -->
+	  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	  <!-- Custom styles for this template -->
+	  <link href="../css/heroic-features.css" rel="stylesheet">
+	
+	</head>
+	
+	<style>
+        .card-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        img {
+            height: 180px;
+        }
+	    #project-preview {
+	        cursor:pointer;
+	    }
+	    #prev{
+	      width: 100px;
+	      text-align: center;
+	      padding-top: 100px;
+	      font-size: 60px;
+	
+	    }
+	
+	    #next{
+	      width: 100px;
+	      text-align: center;
+	      padding-top: 100px;
+	      font-size: 60px;
+	    }
+	    #temp{
+	      width: 100px;
+	      text-align: center;
+	      padding-top: 100px;
+	      font-size: 60px;
+	      visibility: hidden;
+	    }
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none;
+        }
+	</style>    
+	
+	<body>
+	
+	<div ng-app="myApp" ng-controller="homeCtrl" >
+	
+	    <!-- Navigation -->
+	    <div id="nav-placeholder" class="mb-5">
+	        <div ng-include="'nav.html'"></div>
+	    </div> 
+        
+        <div ng-show="loading">
+            <div ng-include="'loading.html'"></div> 
+        </div>
+	
+	    <!-- Page Content -->
+	    <div class="container" ng-hide="loading" ng-cloak>
+	
+	    <!-- Jumbotron Header -->
+	
+	    <div class = "text-primary" ng-init="loadUserMayLike()"><b>You May Like:</b>
+	        </div>
+	    <div class="row text-center" id="projectList" >
+	
+	        <a href="javascript:;" id="temp" ng-click="changeYouMayLike('prev')" ng-hide="visibleTemp1"><</a>       
+	        <a href="javascript:;" id="prev" ng-click="changeYouMayLike('prev')" ng-show="visiblePrev1"><</a>
+	
+	        <div class="col-lg-3 col-md-6 mb-4" ng-repeat="project in currentProject| limitTo:limit">
+	            <div id="project-preview" class="card h-100" ng-click="getProjectDetail(project.id)">
+	              <img class="card-img-top" ng-src="{{project.pictureURL || 'http://placehold.it/500x325'}}" onerror="this.src='http://placehold.it/500x325'">
+	              <div class="card-body">
+	                <h4 class="card-title">{{project.projectName}}</h4>
+	                <p class="card-text">author:{{project.username}}</p>
+	                <p class="card-text">{{project.category}}</p>
+	              </div>
+	            </div>
+	        </div>
+	
+	            <a href="javascript:;" id="next" ng-click="changeYouMayLike('next')" ng-hide="visibleNext1">></a>
+	
+	
+	    </div>
+	
+	    <!-- Page Features -->
+	    <div class = "text-primary" ng-init="loadMostRecent()"><b>Most Recent Projects:</b>
+	    </div>
+	    <div class="row text-center" id="projectList">
+	
+	       <a href="javascript:;" id="temp" ng-click="changeMostRecent('prev')" ng-hide="visibleTemp2"><</a> 
+	        <a href="javascript:;" id="prev" ng-click="changeMostRecent('prev')"  ng-show="visiblePrev2" ><</a>
+	
+	         <div class="col-lg-3 col-md-6 mb-4" ng-repeat="project in currentProject1 | limitTo:limit">
+	            <div id="project-preview" class="card h-100" ng-click="getProjectDetail(project.id)">
+	              <img class="card-img-top" ng-src="{{project.pictureURL || 'http://placehold.it/500x325'}}" onerror="this.src='http://placehold.it/500x325'">
+	              <div class="card-body">
+	                <h4 class="card-title">{{project.projectName}}</h4>
+	                <p class="card-text">author:{{project.username}}</p>
+	                <p class="card-text">{{project.category}}</p>
+	              </div>
+	            </div>
+	        </div>
+	
+	              <a href="javascript:;" id="next" ng-click="changeMostRecent('next')" ng-hide="visibleNext2">></a>
+	
+	    </div>
+	
+	
+	    <div class = "text-primary" ng-init="loadMostPopular()"><b>Most Popular Projects:</b>
+	    </div>
+	    <div class="row text-center" id="projectList">
+	
+	
+	        <a href="javascript:;" id="temp" ng-click="changeMostPopular('prev')" ng-hide="visibleTemp3"><</a> 
+	        <a href="javascript:;" id="prev" ng-click="changeMostPopular('prev')"  ng-show="visiblePrev3"><</a>
+	
+	        <div class="col-lg-3 col-md-6 mb-4" ng-repeat="project in currentProject2 | limitTo:limit">
+	            <div id="project-preview" class="card h-100" ng-click="getProjectDetail(project.id)">
+	              <img class="card-img-top" ng-src="{{project.pictureURL || 'http://placehold.it/500x325'}}" onerror="this.src='http://placehold.it/500x325'">
+	              <div class="card-body">
+	                <h4 class="card-title">{{project.projectName}}</h4>
+	                <p class="card-text">author:{{project.username}}</p>
+	                <p class="card-text">{{project.category}}</p>
+	              </div>
+	            </div>
+	        </div>
+	
+	          <a href="javascript:;" id="next" ng-click="changeMostPopular('next')"  ng-hide="visibleNext3">></a>
+	
+	    </div>
+	    <!-- /.row -->
+	
+	
+	
+	  </div>
+	  <!-- /.container -->
+	
+	    <!-- Footer -->
+	    <div id="nav-placeholder">
+	        <div ng-include="'footer.html'"></div>
+	    </div>   
+	
+	</div>
+	<!-- div ng-app -->
+	
+	<!-- Script -->
+	  <script src="../vendor/jquery/jquery.min.js"></script>
+	  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	  <script type="text/javascript" src="../assets/ng-tags-input.min.js"></script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js"></script>
+	  <script src="../app.js"></script>>
+	  <script src="../controllers/home.js"></script>
+	  <script src="../controllers/nav.js"></script>
+	
+	</body>
+	</html> 

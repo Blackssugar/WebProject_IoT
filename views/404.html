@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    img{
+        max-width:180px;
+    }
+    .col-lg-8-uploadProject{
+      max-width: 100%;
+      flex: 0 0 100%
+    }
+    #error {
+      position: relative;
+      margin: auto;
+      font-size: 7rem;
+      white-space: nowrap;
+      text-shadow: 0 2px 2px rgba(#000, 0.9);
+    }
+    .lead {
+        position: relative;
+    }
+</style>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>404 Error</title>
+
+  <!-- Bootstrap  -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/blog-post.css" rel="stylesheet">
+  <!--Input tag css -->
+  <link rel="stylesheet" href="../css/ng-tags-input.min.css">
+    
+<!-- Custom styles for this template-->
+  <link href="../css/account.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div ng-app="myApp">
+    
+
+
+    <!-- Page Content -->
+    <div class="container">
+        <!--div class="container h-100 d-flex justify-content-center"-->
+        <div class="text-center">
+        <!-- Page Content -->
+            <div id="error">404</div>
+            <p class="lead">Page not found.
+              <a href="home.html">Return home</a>.</p>
+        </div>
+    </div>
+    <!-- /.container -->
+
+
+      
+</div>
+<!-- div ng-app>
+
+<!-- Script -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script type="text/javascript" src="../assets/ng-tags-input.min.js"></script>
+  <script src="../app.js"></script>>
+  <script src="../controllers/nav.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js"></script>
+<script>
+  var Messenger = function(el){
+  'use strict';
+  var m = this;
+  
+  m.init = function(){
+    m.codeletters = "&#<>\/&*+%?£@§$";
+    m.nCalls = 1;
+    m.interval = 10;
+    m.length = 3;
+    m.message = "404";
+    m.animateIn();
+  };
+
+  
+  m.animateIn = function(){
+       
+    var random_text = m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+    m.nCalls += 1;
+    if(m.nCalls>m.interval*m.message.length) {
+        m.nCalls = 1;
+    }
+    if(m.nCalls>m.interval) {
+        var faded = "";
+        for(var i=0;i<Math.floor(m.nCalls/m.interval);i++) {
+            faded += m.message.charAt(i);
+        }
+        random_text = faded + random_text;
+        //console.log(random_text);
+    }
+    if(random_text.length <= 3) {
+        $(el).html(random_text);
+        setTimeout(m.animateIn,20);
+    } else {
+        $(el).html("404");
+        setTimeout(m.animateIn,2000);   
+    }
+    
+      /*
+    m.nCalls += 1;
+    var random_text = "";
+    for(var i=0;i<m.message.length;i++) {
+        random_text += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+    }
+    if(m.nCalls>m.interval*m.message.length) {
+        m.nCalls = 1;
+    }
+    if(m.nCalls>m.interval) {
+        var faded = "";
+        var i=0;
+        for(;i<Math.floor(m.nCalls/m.interval);i++) {
+            faded += m.message.charAt(i);
+        }
+       // random_text = faded + random_text.substr(i);
+        //console.log(random_text);
+    }
+    if(m.nCalls<m.interval*m.message.length) {
+        $(el).html(random_text);
+        setTimeout(m.animateIn,20);
+    } else {
+        $(el).html("404");
+        setTimeout(m.animateIn,2000);   
+    } */
+  };
+  
+  m.init();
+}
+
+  var messenger = new Messenger($('#error'));
+</script>
+
+</body>
+
+</html>

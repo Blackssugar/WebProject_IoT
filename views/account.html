@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Account Information</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="../css/account.css" rel="stylesheet">
+  <script>
+    if(document.URL.indexOf("id=")<0){
+      window.location.href = "404.html";
+    }
+    console.log(document.cookie);
+  </script>
+
+</head>
+
+<body id="page-top" class ng-app="myApp" ng-controller="accountCtrl">
+  <!-- Page Wrapper -->
+  <!-- Navigation -->
+  <div id="nav-placeholder" class="mb-5">
+    <div ng-include="'nav.html'"></div>
+  </div>
+  <div id="wrapper">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column align-items-center">
+      <!-- Main Content -->
+      <div id="content" class="col-xl-10 col-lg-10 col-md-12 col-sm-8">
+        <div id="user" class="container-fluid">
+          <div class="col-12 my-5">
+            <!-- Users basic information -->
+            <div class="card col">
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-8 ml-xl-5 ml-lg-2 ml-md-0 ml-2 align-items-center">
+                  <img class="ml-xl-5 ml-md-3 ml-sm-5 ml-5 my-3 img-fluid rounded-circle" style="height: 12rem; width: 12rem" ng-src="{{thisProfile_pic|| 'https://image.flaticon.com/icons/svg/554/554846.svg'}}" onerror="this.src='https://image.flaticon.com/icons/svg/554/554846.svg'">
+                </div>
+                <div class="col-lg-8 col-md-9 ml-xl-4 ml-md-0 ml-sm-1">
+                    <div class="col-lg-10 col-md-11 col-sm-12 ml-md-3 ml-sm-1 mr-1 mt-md-5 mt-sm-1">
+                      <div class="row">
+                        <div class="text-lg col-xl-4 col-md-5 col-sm-7 col-6 ml-sm-5 font-weight-bold text-secondary text-uppercase py-3"><span id="ng-username" style="display: none">{{username}}</span></div>
+                        <div id="follow-status"class="col-xl-6 col-md-5 col-sm-6 col-6 ml-md-0 ml-sm-5 ml-0 py-2">
+                          <a href="#" ng-click="changeFollow()" class="btn btn-primary btn-icon-split">
+                            <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text" id="ng-status" style="display: none">{{status}}</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="row mt-xl-3 mt-lg-2 ml-xl-0 ml-lg-2 ml-md-3 ml-sm-0 ml-2">
+                        <div class="card col-xl-3 col-lg-4 col-md-3 col-sm-12 col-11 mr-xl-3 mr-lg-1 mr-md-2 my-3 border-left-primary shadow h-auto">
+                          <div class="row my-2 align-items-center">
+                            <div class="ml-md-2 ml-sm-3 ml-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase my-1"><a ng-click="showFollowers()" href="">Followers :</a>
+                                <span class="text-xs ml-1 font-weight-bold text-gray-800" id="ng-followers" style="display: none">{{followers}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card col-xl-3 col-lg-4 col-md-3 col-sm-12 col-11 my-3 mr-xl-3 mr-lg-1 mr-md-2 border-left-secondary shadow h-auto">
+                          <div class="row my-2 align-items-center">
+                            <div class="ml-md-2 ml-sm-3 ml-2">
+                              <div class="text-xs font-weight-bold text-secondary text-uppercase my-1"><a ng-click="showFollowing()" href="">Following :</a>
+                                <span class="text-xs ml-1 font-weight-bold text-gray-800" id="ng-followings" style="display: none">{{followings}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card col-xl-3 col-lg-3 col-md-3 my-3 col-sm-12 col-11 border-left-info shadow h-auto">
+                          <div class="row my-2 align-items-center">
+                            <div class="ml-md-2 ml-sm-3 ml-2">
+                              <div class="text-xs font-weight-bold text-info text-uppercase my-1"><a href="#userProjects">Projects :</a>
+                                <span class="text-xs ml-1 font-weight-bold text-gray-800" id="ng-projects" style="display: none">{{projects}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- Users introduction -->
+            <div class="col row">
+              <div class="col-md-4">
+                <div class="card shadow mb-4 my-3 pl-0">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Personal Infomation</h6>
+                  </div>
+                  <div class="card-body">
+                    <div style="display: none" id="intro-holder" class="align-content-center">
+                      <span class="text-xl-center">There is no introduction for this user</span>
+                    </div>
+                    <div ng-repeat="(key,value) in userInfo">
+                      <code class="text-uppercase">{{key}} : </code><span>{{value}}</span></br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Projects of this User-->
+              <div class="col-md-8" id="userProjects">
+                <div class="card shadow mb-4 my-3">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                  </div>
+                  <div class="card-body row">
+                    <div style="display: none" id="pro-holder" class="align-content-center m-auto">
+                      <span class="text-xl-center">There is no projects for this user</span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4" ng-repeat="item in displayProjects" ng-click="getProjectDetail(item.id)">
+                      <div class="card h-100 align-items-center">
+                        <img class="card-img-top project-image" ng-src="{{item.pictureURL || 'http://placehold.it/500x325'}}" alt="" onerror="this.src='http://placehold.it/500x325'">
+                        <div class="card-body align-items-center">
+                          <span class="text-lg-center card-title text-uppercase text-secondary"><a href="">{{item.projectName}}</a></span></br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div>
+                      <ul class="pagination">
+                        <li ng-class="{true:'disabled'}[currentPage==1]" class="paginate_button page-item previous" id="prevoius_page" >
+                          <a class="page-link" ng-click="loadPre()" href="#"><<</a>
+                        </li>
+                        <li class="paginate_button page-item" ng-class="{true:'active'}[currentPage==pageNum]" ng-repeat="pageNum in pages">
+                          <a class="page-link" href="#" ng-click="reloadPage(pageNum)">{{pageNum}}</a>
+                        </li>
+                        <li ng-class="{true:'disabled'}[currentPage==allPageNum]" class="paginate_button page-item next" id="next_page">
+                          <a class="page-link" href="#" ng-click="loadNext()">>></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+
+  <!--hidden parts-->
+  <div id="allFollower" class="modal fade show">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content" style="max-height: 25rem">
+        <div  class="modal-header">
+          <h5 class="modal-title">All Followers</h5>
+          <button class="close" type="button" ng-click="closeFollower()">
+            <span >x</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div style="display: none" id="follower-holder" class="align-content-center m-auto">
+              <span class="text-xl-center">There is no follower for this user</span>
+            </div>
+            <div class="col-6 my-2" ng-repeat="f in followerList">
+              <div class="card" ng-click="viewAuthor(f.id)">
+                <div class="row my-2 align-items-center">
+                  <div class="col-4">
+                    <img class="img-profile rounded-circle ml-3" ng-src="{{f.profile_pic|| 'https://image.flaticon.com/icons/svg/554/554846.svg'}}" onerror="this.src='https://image.flaticon.com/icons/svg/554/554846.svg'">
+                  </div>
+                  <div class="ml-3 col-6">
+                    <span><a href="">{{f.nickname}}</a></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="allFollowing" class="modal fade show">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content" style="max-height: 25rem">
+        <div  class="modal-header">
+          <h5 class="modal-title">All Followings</h5>
+          <button class="close" type="button" ng-click="closeFollowing()">
+            <span >x</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div style="display: none" id="following-holder" class="align-content-center m-auto">
+              <span class="text-xl-center">There is no following for this user</span>
+            </div>
+            <div class="col-6 my-2" ng-repeat="f in followingList">
+              <div class="card" ng-click="viewAuthor(f.id)">
+                <div class="row my-2 align-items-center">
+                  <div class="col-4">
+                    <img class="img-profile rounded-circle ml-3" ng-src="{{f.profile_pic|| 'https://image.flaticon.com/icons/svg/554/554846.svg'}}" onerror="this.src='https://image.flaticon.com/icons/svg/554/554846.svg'">
+                  </div>
+                  <div class="ml-3 col-6">
+                    <span><a href="">{{f.nickname}}</a></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="pop-up">
+    <div ng-include="'Login&Register pop-up.html'"></div>
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Footer -->
+  <div id="footer-placeholder" class="mb-5">
+    <div ng-include="'footer.html'"></div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../controllers/account.js"></script>
+  <script src="../controllers/nav.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Explore</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/heroic-features.css" rel="stylesheet">
+
+</head>
+<style>
+    .card-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+    }
+    [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none;
+    }
+    #pageJump {
+        display: flex;
+        justify-content: center;
+    }
+    img{
+        height: 180px; width: auto;
+    }
+    .notFound {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div ng-app="myApp" ng-controller="exploreCtrl">
+        <div data-ng-init="onLoad()">
+
+    <div id="nav-placeholder">
+        <div ng-include="'nav.html'"></div>
+    </div> 
+
+    <div class="container text-gray-800">
+
+                   
+        <nav class="navbar navbar-expand navbar-light bg-light mb-4">
+            <a class="navbar-brand" href="#">Category</a>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="categoryDropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-bind="categorizedBy"></a>
+                    <div class="dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="navbarDropdown" >
+                      <a class="dropdown-item" href="#" ng-repeat="c in categoryList" ng-click="sortByCategory($event)">{{c.category}}</a>
+                     </div>
+                 </li>
+            </ul>
+            <a class="navbar-brand" href="#">Sort By</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-bind="sortedBy"></a>
+                        <div class="dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#" ng-click="sortByFeature($event)">Most Recent</a>
+                            <a class="dropdown-item" href="#" ng-click="sortByFeature($event)">Most Views</a>
+                            <a class="dropdown-item" href="#" ng-click="sortByFeature($event)">Most Likes</a>
+                        </div>
+                    </li>  
+                </ul>
+            <button class="btn btn-outline-danger btn-sm" ng-click="clearFilter()" ng-show="categoryTrigger || sortTrigger" ng-cloak style="margin-left: 2%">
+                <i class="fa fa-trash"></i> Clear
+            </button>
+        </nav>     
+        <div ng-show="loading">
+            <div ng-include="'loading.html'"></div> 
+        </div>
+    
+        <div class="notFound" ng-show="notFound" ng-cloak>
+            <h2>No Project Found</h2>
+        </div>
+        
+    <!-- Page Features -->
+    <div class="row text-center" id="projectList" ng-cloak>
+   <div class="col-lg-3 col-md-6 mb-4" ng-repeat="project in projectList">
+        <div id="project-preview" class="card h-100" ng-click="getProjectDetail(project.id)">
+          <img class="card-img-top" ng-src="{{project.pictureURL || 'http://placehold.it/500x325'}}" onerror="this.src='http://placehold.it/500x325'" >
+          <div class="card-body">
+            <h4 class="card-title">{{project.projectName}}</h4>
+            <p class="card-text" id="projectId">{{project.username}}</p>
+			<p class="card-text">{{project.category}}</p>
+          </div>
+      </div>
+    </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+    <nav aria-label="pagination">
+        <ul class="pagination" id="pageJump"></ul>
+    </nav>
+        
+    <!-- /.pageNumber -->
+    
+            
+    <!-- Footer -->
+    <div id="nav-placeholder">
+        <div ng-include="'footer.html'"></div>
+    </div>   
+        
+    </div> 
+</div>
+<!-- div ng-app -->
+
+<style>
+    #project-preview {
+        cursor:pointer;
+    }
+</style>
+
+<!-- Script -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js"></script>
+  <script type="text/javascript" src="../assets/ng-tags-input.min.js"></script>
+  <script src="../app.js"></script>>
+  <script src="../controllers/explore.js"></script>
+  <script src="../controllers/nav.js"></script>
+
+</body>
+
+</html>

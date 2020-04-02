@@ -1,0 +1,186 @@
+<!--<head>-->
+<!--  <meta charset="utf-8">-->
+<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+
+<!--  <title>Register</title>-->
+
+<!--  &lt;!&ndash; Custom fonts for this template&ndash;&gt;-->
+<!--  &lt;!&ndash; Custom fonts for this template&ndash;&gt;-->
+<!--  <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">-->
+<!--  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
+<!--  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">-->
+
+<!--  &lt;!&ndash; Custom styles for this template&ndash;&gt;-->
+<!--  <link href="../css/account.css" rel="stylesheet">-->
+<!--  <script type="text/javascript" src="../js/jquery.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<style>
+   .black_overlay{
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            z-index:1001;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=88);
+        }
+   .white_content {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 80%;
+            padding: 20px;
+            transform: translateY(-50%) translateX(-50%);
+            border: 0px solid orange;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        }
+   .register_content {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 450px;
+            height: 90%;
+            padding: 20px;
+            transform: translateY(-50%) translateX(-50%);
+            border: 0px solid orange;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        }
+   .exit{
+        position:fixed;
+        top:0%;
+        right:0%;
+   }
+</style>
+  
+<!-- Login form-->
+<div id="light" class="white_content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+          </div>
+          <form class="user">
+            <div class="form-group my-4">
+              <input type="text" class="form-control form-control-user" id="signin" placeholder="Enter Email / UserName..." required>
+            </div>
+            <div class="form-group my-4">
+              <input type="password" class="form-control form-control-user" id="psw" placeholder="Password" required>
+            </div>
+            <input type="button" class="mt-4 btn btn-primary btn-user btn-block" onclick="Login('user')" value="Login" />
+            <input type="button" class="mt-4 btn btn-primary btn-user btn-block" onclick="Login('admin')" value="Login As Admin" />
+          </form>
+          <hr>
+          <div class="text-center">
+            <a class="small" href="forgetPassword.html">Forgot Password?</a>
+          </div>
+           <div class="text-center">
+            <a class="small" href = "javascript:void(0)" onclick="showRegister()">Create an Account!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  <!-- Register form-->
+<div id="register" class="register_content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+          </div>
+          <form class="user">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-user" id="username" placeholder="UserName" required>
+              <span id="name_status"></span>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control form-control-user" id="email" placeholder="Email Address" required>
+              <span id="email_status"></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control form-control-user" id="password" placeholder="Password" maxlength="20" required>
+              <span id="pass_status" ></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control form-control-user" id="cpassword" placeholder="Repeat Password" required>
+              <span id="cpass_status" ></span>
+            </div>
+            <div class="form-group">
+              <input type="date" class="form-control form-control-user" id="birth">
+            </div>
+            <input type="button" class="btn btn-primary btn-user btn-block" value="Register" onclick="checkAll()"/>
+          </form>
+          <hr>
+          <div class="text-center">
+            <a class="small" href = "javascript:void(0)" onclick = "showLogin()">Already have an account? Login!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+              
+<div id="fade" class="black_overlay">
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<!--<script src="../vendor/jquery/jquery.min.js"></script>-->
+<!--<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+<!-- Core plugin JavaScript-->
+<!--<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>-->
+
+<!-- Custom scripts for all pages-->
+<!--<script src="../js/sb-admin-2.min.js"></script>-->
+<!--<script type="text/javascript" src="../js/jquery.js"></script>-->
+
+<script src="../controllers/login.js"></script>
+<script src="../controllers/register.js"></script>
+<script>
+     $('body').dblclick(function(e){
+         if(document.getElementById('light').style.display =='block'){
+           if( e.target.id == 'light')
+              { return true; }
+           else
+              { $('#light').hide();
+                $('#fade').hide();
+              }
+         }
+         else{
+               if( e.target.id == 'register') {
+                   return true;
+               }
+                else{
+                    $('#register').hide();
+                    $('#fade').hide();
+                }
+         }
+
+     });
+     function showRegister() {
+         document.getElementById('light').style.display='none';
+         document.getElementById('register').style.display='block';
+         document.getElementById('fade').style.display='block';
+     }
+     function showLogin() {
+         document.getElementById('light').style.display='block';
+         document.getElementById('register').style.display='none';
+         document.getElementById('fade').style.display='block';
+     }
+</script>
+ 
+<!--</body>-->
+

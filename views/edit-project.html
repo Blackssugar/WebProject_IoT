@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    img{
+        max-width:180px;
+    }
+    .col-lg-8-uploadProject{
+      max-width: 100%;
+      flex: 0 0 100%
+    }
+</style>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Edit Project</title>
+
+  <!-- Bootstrap  -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/blog-post.css" rel="stylesheet">
+  <!--Input tag css -->
+  <link rel="stylesheet" href="../css/ng-tags-input.min.css">
+<!-- Custom styles for this template-->
+  <link href="../css/account.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+      <script>
+        var info = document.cookie;
+        if(info.indexOf("PHPSESSID")<0 || info.indexOf("userType=user")<0){
+          alert("Please Login Firstly!");
+          window.location.href = "login.html";
+        }
+      </script>
+</head>
+
+<body>
+<div ng-app="myApp" ng-controller="uploadProjectCtrl" div data-ng-init="onLoad('edit')">
+    
+  <!-- Navigation -->
+    <div id="nav-placeholder">
+        <div ng-include="'nav.html'"></div>
+    </div> 
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+        
+    <!-- Post Content Column -->
+    <div class="col-lg-8-uploadProject">
+    
+    <!-- Form -->
+    <form action="" method="post" onsubmit="" ng-init="readCategory()" enctype="multipart/form-data">  
+        <!-- Title -->
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="font-weight-bold">Title</h5>
+            <div class="input-group">
+                <input type="text" class="form-control form-control-user" id="title" ng-value = "projectTitle" required>
+                <span id="title_status"></span>
+            </div>
+            <h5 class="font-weight-bold" style="margin-top: 2%">Category</h5>
+            <div class="input-group">
+                <select ng-options="category.category for category in categoryList" ng-model="selectedCategory">
+                <option value="">--Select Category--</option>
+                </select>
+                <span id="category_status"></span>
+            </div>             
+          </div>
+        </div>
+
+        <!-- Upload Image -->
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="font-weight-bold">Upload Picture</h5>
+            <img id="img-preview" ng-src="{{imageSource}}" alt="your image" />
+         <input type="button" class="btn btn-secondary" value="Choose image to upload" onclick=pictureURL.click() style="2px"/>
+            <input type="file" name="pictureURL" id="pictureURL" style="display: none;" onchange="angular.element(this).scope().readImage(this); ya.value=value" accept="image/*"/>
+        <input name=ya style="border:#4e73df; width:600px; color: gray" placeholder="No files selected">
+          </div>
+        </div>  
+        
+        <!-- Rich Text Editor -->
+        <div class="card my-4">
+            <div class="card-body">
+            <h5 class="font-weight-bold">Project Description</h5>
+
+            <fieldset data-ng-repeat="section in editorSet track by $index">  
+                <br>
+                <input type="text" name= "section_title_{{$index}}" id="section_title_{{$index}}" ng-value = "section.description_titles">
+                <button class="btn btn-danger" ng-click="removeEditor($index)"><i class="fas fa-times"></i></button>
+                <span id="sectionTitle_status_{{$index}}"></span>
+                <textarea id="section_{{$index}}" name="section_{{$index}}" cols="40" style="width: 1000px; height: 300px;" ng-model="editorSet[$index].descriptions">{{section.descriptions}}</textarea>
+                <!--input type="button" class="btn btn-primary" ng-click="removeEditor($index)" value="Remove"-->
+                <span id="editor_status"></span>
+                <!--textarea style="width: 300px; height: 100px;" id="myArea2"></textarea-->
+            </fieldset>
+            <br>
+            <input type="button" class="btn btn-primary" ng-click="addNewEditor()" value="Add new field">
+          </div>
+        </div>  
+        
+        <!-- Upload File -->
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="font-weight-bold">Upload File</h5>
+              <input type="button" class="btn btn-secondary" value="Choose file to upload" onclick=fileURL.click() style="2px"/>
+              <input type="file" name="fileURL" id="fileURL" style="display: none;" onchange="ye.value=value">
+              <input name=ye style="border:#4e73df; width:600px; color: gray" placeholder="No files selected">
+          </div>
+        </div>  
+        
+        <!-- Tag input -->
+        <div class="card my-4">
+            <div class="card-body">  
+                <h5 class="font-weight-bold">Tags</h5> 
+                <tags-input ng-model="tags" use-strings="true"></tags-input>
+             </div>
+        </div>         
+        
+        <!-- Submit/Cancel -->
+        <div class="card my-4">
+            <div class="card-body"> 
+            <input class= "btn btn-primary" type="button" value="Submit"  ng-click = "checkAll()"> 
+                <input class= "btn btn-primary" type="button" ng-click="confirmCancel()" value="Cancel">
+             </div>
+        </div>                  
+    </form>
+
+    </div>
+    <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div id="footer-placeholder">
+        <div ng-include="'footer.html'"></div>
+    </div>
+</div>
+    </div>
+<!-- div ng-app>-->
+
+<!-- Script -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js"></script>
+  <script type="text/javascript" src="../assets/ng-tags-input.min.js"></script>
+  <script src="../app.js"></script>
+  <script src="../controllers/nav.js"></script>
+  <script src="../controllers/upload-project.js"></script>
+  <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> 
+  <!--script type="text/javascript">
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+  </script-->
+
+
+</body>
+
+</html>

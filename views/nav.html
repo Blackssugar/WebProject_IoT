@@ -1,0 +1,131 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Login</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="../css/account.css" rel="stylesheet">
+
+</head>
+<div ng-app="myApp" ng-controller="navCtrl" >
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 fixed-top shadow">
+    <div class="container" ng-init="checkLogin()">
+     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">IoT Project Hub <sup>CS26</sup></div>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav" style="margin-left: auto">
+          <li class="nav-item d-none d-sm-inline-block form-inline" style="margin-right: 5px">
+            <a href="explore.html"><input type="button" ng-click="" value="Explore" class="btn btn-outline-primary"></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block form-inline">
+            <input type="button" ng-click="addProject($event)" value="Add Project" class="btn btn-outline-success"> 
+          </li>
+          <li class="nav-item d-none d-sm-inline-block form-inline">
+             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-1 border-secondary small" placeholder="Search for..." ng-model="keyword" ng-keyup="$event.keyCode == 13 && search(keyword)" aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" ng-click="search(keyword)">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          </li>      
+        <li class="nav-item d-none d-sm-inline-block form-inline" style="margin-left: 5px" ng-hide="login">
+            <a href="login.html"><input type="button" ng-click="" value="Login" class="btn btn-outline-danger"></a>
+            </li> 
+            
+ <!-- Nav Item - Function Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars fa-fw"></i>
+              </a>
+              <!-- Dropdown - Buttons -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+               
+                <a class="dropdown-item" href="explore.html">
+                  <i class="text-gray-400"></i>
+                  Explore
+                </a>
+                <a class="dropdown-item" href="upload-project.html">
+                  <i class="text-gray-400"></i>
+                  Add Project
+                </a>
+                 <a class="dropdown-item" href="login.html" ng-hide="login">
+                  <i class=" text-gray-400"></i>
+                  Login
+                </a>
+              </div>
+            </li>
+            
+ <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-1 border-secondary small" placeholder="Search for..." ng-model="keyword" ng-keyup="$event.keyCode == 13 && search(keyword)" aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" ng-click="search(keyword)">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+                </form>
+              </div>
+            </li>
+ <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow" ng-show='login'>
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" ng-src="{{profileImg || 'https://image.flaticon.com/icons/svg/554/554846.svg'}}" onerror="this.src='https://image.flaticon.com/icons/svg/554/554846.svg'">
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{userName}}</span>
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#" ng-click="viewProfile()">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Account
+                </a>
+                <a class="dropdown-item" href="personalSettings.html">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+<!--                <a class="dropdown-item" href="#">-->
+<!--                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                  Activity Log-->
+<!--                </a>-->
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" ng-click="Logout()">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+
+            
+          </ul>
+        </div>
+    </div>
+
+ </nav>
+</div>
+

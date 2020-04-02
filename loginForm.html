@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login Page</title>
+
+</head>
+
+<body>
+
+<h2>Login form</h2>
+
+<form action="./php/login.php" method="post" onsubmit="return logincheck();">
+  Username:<br>
+  <input type="text" name="username" id="username" value="" required>
+  <br>
+  Password:<br>
+  <input type="text" name="password" id="password" value="" required>
+  <span id="password_status"></span>
+  <br><br>
+  <input type="submit" value="Submit" id="submit">
+  <input type="button" value="Forget password?" onclick="window.location.href='forgetPasswordForm.html'">
+ 
+</form>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/loginValidate.js"></script>
+</body>
+</html>
+

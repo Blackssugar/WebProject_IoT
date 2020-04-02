@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<title>ContactUs</title>
+
+  <style type="text/css">
+  	h3{
+  		color: #4e73df !important;
+  		margin-left: 100px;
+  	}
+  	p{
+  		margin-left: 120px;
+      margin-right: 120px;
+      color: #5a5c69 !important;
+  	}
+    body{
+          font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+    h1{
+          color: white;
+          position: center;
+          margin-left: 100px;
+
+    }
+    .title-banner {
+    transition: background-image .5s ease, background-color .5s ease;
+    margin-bottom: 40px;
+    background-color: #4e73df;
+    background-position: center;
+    background-size: cover;
+    padding: 20px 0;
+    width: 100%;
+    }
+  </style>
+    	  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+  <link href="../css/heroic-features.css" rel="stylesheet">
+</head>
+<body>
+<div ng-app="myApp" >
+    <div class="container">
+        
+    <!-- Navigation -->
+    <div id="nav-placeholder">
+        <div ng-include="'nav.html'"></div>
+    </div> 
+
+      <div class="title-banner">
+      <div class="inner">
+        <h1 class="title-banner-h1">Contact Us</h1>
+      </div>
+    </div>
+        
+		<!-- <h2 style="padding-top: 100px; color: grey; margin-left: 100px;">Contact Us</h2> -->
+		<p>
+			"If you have any comments or questions regarding our website, please use one of the following methods."
+		</p>
+		<br>
+
+		<h3>Email</h3>
+		<p>
+			Comp5703_cp26_help@gmail.com
+		</p>
+		<br>
+		<h3>Phone</h3>
+		<p>
+			********
+		</p>
+		<br>
+		<h3>Facebook</h3>
+		<p>Comp5703_cp26</p>
+		<br>
+        <br>
+		<br>
+		<br>
+    
+        <!-- Footer -->
+    <div id="nav-placeholder">
+        <div ng-include="'footer.html'"></div>
+    </div> 
+    </div>
+	</div>
+
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script type="text/javascript" src="../assets/ng-tags-input.min.js"></script>
+  <script src="../app.js"></script>>
+  <script src="../controllers/nav.js"></script>
+
+</body>
+</html>

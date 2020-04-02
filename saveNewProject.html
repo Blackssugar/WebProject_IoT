@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<body>
+      
+		<form action = "/cs26/php/saveNewProject.php" method = "POST" enctype = "multipart/form-data">
+			Project name:<br>
+			<input type="text" name="projectName" id="projectName" required>
+			<br>
+			Description:<br>
+			<input type="text" name="description" id="description" required>
+			<br>
+			Category:<br>
+			<input type="text" name="category" id="category"  required>
+			<br>
+			<input type="hidden" name="userId" id="userId" value="5" >
+			<br>
+			Picture: <br>
+			<input type = "file" name = "pictureURL" /><br>
+			Thumbnail <br>
+			<input type = "file" name = "pictureThumbnailURL" /><br>
+			<input type = "submit"/>
+			
+			
+		</form>
+      
+	</body>
+</html>

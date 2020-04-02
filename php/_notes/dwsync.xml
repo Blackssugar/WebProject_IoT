@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="addBookmark.php" server="C:/xampp/htdocs/cs26/" local="132161365894178412" remote="132161365890000000" Dst="2" />
+<file name="checkdata.php" server="C:/xampp/htdocs/cs26/" local="132126071704272988" remote="132126035700000000" Dst="2" />
+<file name="decreaseLikeCount.php" server="C:/xampp/htdocs/cs26/" local="132161421974517463" remote="132161421970000000" Dst="2" />
+<file name="forget_password.php" server="C:/xampp/htdocs/cs26/" local="132133917521892400" remote="132133881520000000" Dst="2" />
+<file name="getFollowers.php" server="C:/xampp/htdocs/cs26/" local="132161365962599874" remote="132161365960000000" Dst="2" />
+<file name="getFollowings.php" server="C:/xampp/htdocs/cs26/" local="132161365962989816" remote="132161365960000000" Dst="2" />
+<file name="getProfile.php" server="C:/xampp/htdocs/cs26/" local="132161369668147965" remote="132161369660000000" Dst="2" />
+<file name="getProjectInfo.php" server="C:/xampp/htdocs/cs26/" local="132161427630305278" remote="132161427630000000" Dst="2" />
+<file name="increaseLikeCount.php" server="C:/xampp/htdocs/cs26/" local="132161365892267884" remote="132161365890000000" Dst="2" />
+<file name="loginCheck.php" server="C:/xampp/htdocs/cs26/" local="132162126158206572" remote="132162126150000000" Dst="2" />
+<file name="main.css" server="C:/xampp/htdocs/cs26/" local="132133776680581446" remote="132133740680000000" Dst="2" />
+<file name="messages.php" server="C:/xampp/htdocs/cs26/" local="132133777225197286" remote="132133741220000000" Dst="2" />
+<file name="password_logic.php" server="C:/xampp/htdocs/cs26/" local="132133919302149390" remote="132133883300000000" Dst="2" />
+<file name="pending.php" server="C:/xampp/htdocs/cs26/" local="132133919401345953" remote="132133883400000000" Dst="2" />
+<file name="removeBookmark.php" server="C:/xampp/htdocs/cs26/" local="132146842964511847" remote="132146806960000000" Dst="2" />
+<file name="reset_password.php" server="C:/xampp/htdocs/cs26/" local="132133923044627973" remote="132133887040000000" Dst="2" />
+<file name="returnForgetPassword.php" server="C:/xampp/htdocs/cs26/" local="132131328037853025" remote="132131292030000000" Dst="2" />
+<file name="resetPassword.php" server="C:/xampp/htdocs/cs26/" local="132131328037832978" remote="132131292030000000" Dst="2" />
+<file name="getUser.php" server="C:/xampp/htdocs/cs26/" local="132161367230000000" remote="132161367230000000" Dst="2" />
+<file name="checkSession.php" server="C:/xampp/htdocs/cs26/" local="132155887735919184" remote="132155887730000000" Dst="2" />
+<file name="loginDB.php" server="C:/xampp/htdocs/cs26/" local="132150192463955700" remote="132150192460000000" Dst="2" />
+<file name="editProject.php" server="C:/xampp/htdocs/cs26/" local="132161365892538427" remote="132161365890000000" Dst="2" />
+<file name="deleteUser.php" server="C:/xampp/htdocs/cs26/" local="132161368470000000" remote="132161368470000000" Dst="2" />
+<file name="deleteBookmark.php" server="C:/xampp/htdocs/cs26/" local="132161365895728815" remote="132161365890000000" Dst="2" />
+<file name="addCategory.php" server="C:/xampp/htdocs/cs26/" local="132161374630294326" remote="132161374630000000" Dst="2" />
+<file name="addComment.php" server="C:/xampp/htdocs/cs26/" local="132161365893978413" remote="132161365890000000" Dst="2" />
+<file name="removeCategory.php" server="C:/xampp/htdocs/cs26/" local="132161374900000000" remote="132161374900000000" Dst="2" />
+<file name="getAllProjects.php" server="C:/xampp/htdocs/cs26/" local="132162130924276472" remote="132162130920000000" Dst="2" />
+<file name="checkLike.php" server="C:/xampp/htdocs/cs26/" local="132161365894278816" remote="132161365890000000" Dst="2" />
+<file name="getMostPopularProjects.php" server="C:/xampp/htdocs/cs26/" local="132161365893625950" remote="132161365890000000" Dst="2" />
+<file name="getMostRecentProjects.php" server="C:/xampp/htdocs/cs26/" local="132161365893516046" remote="132161365890000000" Dst="2" />
+<file name="saveNewProject.php" server="C:/xampp/htdocs/cs26/" local="132161444012884083" remote="132161444010000000" Dst="2" />
+<file name="checkNameExist.php" server="C:/xampp/htdocs/cs26/" local="132161365896378424" remote="132161365890000000" Dst="2" />
+<file name="checkFollow.php" server="C:/xampp/htdocs/cs26/" local="132161365964099905" remote="132161365960000000" Dst="2" />
+<file name="getEmailInfo.php" server="C:/xampp/htdocs/cs26/" local="132161365895351352" remote="132161365890000000" Dst="2" />
+<file name="test.php" server="C:/xampp/htdocs/cs26/" local="132161365893868900" remote="132161365890000000" Dst="2" />
+<file name="loginSession.php" server="C:/xampp/htdocs/cs26/" local="132156108481724564" remote="132156108480000000" Dst="2" />
+<file name="login.php" server="C:/xampp/htdocs/cs26/" local="132150192463955700" remote="132150192460000000" Dst="2" />
+<file name="getProjects.php" server="C:/xampp/htdocs/cs26/" local="132162145852591729" remote="132162145850000000" Dst="2" />
+<file name="getUserProjects.php" server="C:/xampp/htdocs/cs26/" local="132161431518984075" remote="132161431510000000" Dst="2" />
+<file name="selectFilter.php" server="C:/xampp/htdocs/cs26/" local="132161365893278815" remote="132161365890000000" Dst="2" />
+<file name="selectSort.php" server="C:/xampp/htdocs/cs26/" local="132156737743767667" remote="132156737740000000" Dst="2" />
+<file name="deleteProject.php" server="C:/xampp/htdocs/cs26/" local="132161365895018815" remote="132161365890000000" Dst="2" />
+</dwsync>

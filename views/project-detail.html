@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Project Detail Page</title>
+  <div id="result"></div>
+
+<!--script>
+// Check browser support
+
+</script-->    
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-post.css" rel="stylesheet">
+	<script type="text/javascript" src="../js/jquery.js"></script>
+</head>
+
+<style>
+    .card-title {
+        white-space: initial;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #project-card:hover {
+        background: #E8F5FF;
+        transition:all 0.3s ease;
+    }
+    
+    [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none;
+    }  
+     
+   .card-body nav ul li a{
+        color: #898989;
+    }
+</style>
+    
+<body>
+<div ng-app="myApp" ng-controller="projectDetailCtrl">
+    <div data-ng-init="onLoad()">
+    
+  <!-- Navigation -->
+    <div id="nav-placeholder">
+        <div ng-include="'nav.html'"></div>
+    </div> 
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <hr>  
+          
+        <!-- Preview Image -->
+        <div>
+            <img class="img-fluid rounded" ng-src="{{imgSrc}}" alt=""> 
+        </div>  
+            
+        <!-- Title -->
+        <h1 class="mt-4" id="project-title" ng-init="projectTitle=''" ng-cloak>{{projectTitle}}</h1>
+        
+        <!-- Date/Time -->
+        <p ng-cloak>{{uploadTime}}</p>
+
+        <hr>
+        <p ng-init="viewCount='0'; likeCount='0'" ng-cloak>view:{{viewCount}} like:{{likeCount}}</p>
+            
+        <div class="form-group row"> 
+
+            <div class="col-md-3" > 
+                <button ng-class="(isLike)?'btn btn-block btn-success':'btn btn-block btn-primary'" ng-click="pressLike()" ng-init="like_text='Like'" ng-cloak><i class="fa fa-thumbs-up"> {{like_text}}</i> </button>
+            </div>
+
+            <div class="col-md-3">
+                <button ng-class="(isBookmark)?'btn btn-block btn-success':'btn btn-block btn-primary'" ng-click="pressBookmark()" ng-init="bookmark_text='Bookmark'" ng-cloak><i class="fas fa-bookmark"> {{bookmark_text}}</i></button>
+            </div>
+        </div>       
+        
+        <hr>
+
+        <!-- Tags -->
+        <h4>Tag</h4>
+        <a id="tags"></a>
+        <div ng-repeat="tag in tagList" class="d-inline">
+            <span class="badge badge-info" ng-cloak>{{tag}}</span>
+        </div>
+        <hr>
+          
+        <!-- Post Content -->
+        <h4 id="projectDescription">Description</h4>  
+        
+        <div id="descriptions" ng-repeat="section in descriptionList" ng-cloak>
+            <h5 ng-cloak>{{section.title}}</h5>
+            <!--p class="lead" ng-bind-html="section.content">
+                {{section.content}}</p-->
+            <p class="lead" ng-bind-html="section.content">
+                </p>
+        </div>    
+        <hr>
+
+        <!-- File -->
+        <h4 id="files">Related File</h4>
+        <a ng-href="{{fileSrc}}" download ng-cloak>{{fileName}}</a>
+          
+        <!-- Comments Form -->
+        <div class="card my-4">
+          <h5 class="card-header">Leave a Comment:</h5>
+          <div class="card-body">
+            <form method="post" ng-submit="submitComment()" name="form" id="form">
+            <!--form action="../php/Addcomment.php" method="post" onsubmit=""-->
+              <div class="form-group">
+                <textarea class="form-control" rows="3" name="addcomment" ng-model="commentContent"></textarea>
+                <input type="hidden" name="projectId" value="5706" />  
+              </div>
+              <button type="submit" class="btn btn-primary" ng-disabled="!commentContent">Submit</button>
+            </form>
+          </div>
+        </div>
+
+    <!-- Single Comment -->
+    <div id="comments" ng-repeat="comment in commentList">
+        <div class="media mb-4" ng-cloak>
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">{{comment.user}}</h5>
+              <p>{{comment.content}}</p>
+              {{comment.time}}
+          </div>
+        </div>
+      </div>
+          
+      </div> <!-- Post Content Column -->
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Author Widget -->
+        <div class="card my-4">
+          <h5 class="card-header"><a href="" ng-click="viewAuthor()" ng-cloak>{{authorName}}</a></h5>
+          <div class="card-body">
+            <button class="btn btn-secondary" type="button" ng-click="pressFollow()" ng-init="follow_text='Follow'" ng-hide="isSameUser" ng-cloak>{{follow_text}}</button>
+          </div>
+        </div> 
+
+        <!-- Recommendation list Widget -->
+        <div class="card my-4" id="recommend" ng-cloak>
+          <h5 class="card-header">You may also like</h5>
+          <div class="d-inline-flex" id="project-card"  style="margin: 5% 5% 0 5%; cursor: pointer" ng-repeat="project in similarProjects" ng-click="getProjectDetail(project.id)">
+              <div class="align-self-center">
+                <img class="card-img-top" style="width: 180px" ng-src="{{project.pictureURL || 'http://placehold.it/500x325'}}" onerror="this.src='http://placehold.it/500x325'" >
+              </div>
+              <div class="align-self-center" style="margin-left: 2%">
+                <h4 class="card-title">{{project.projectName}}</h4>
+                <p class="card-text">Views: {{project.views}}</p>
+              </div>
+            </div>
+            <span style="margin-bottom: 5% "></span>
+          <div class="notFound" ng-show="notFound" ng-cloak style="text-align: center; margin-bottom: 2%">
+            <h4>No Project Found</h4>
+          </div>
+        </div>          
+          
+          <!-- Table of Content Widget-->
+        <div id="top" class="card my-4">
+          <h5 class="card-header">Table of Content</h5>
+          <div class="card-body">
+              <nav>
+                <ul>
+                  <li><button type="button" ng-click="gotoAnchor('tags')" class="btn btn-link">Tags</button></li>
+                  <li><button type="button" ng-click="gotoAnchor('projectDescription')" class="btn btn-link">Description</button></li>
+                  <!--ul>
+                      <li ng-repeat="section in descriptionList">
+                            {{section.title}}
+                      </li>     
+                  </ul-->
+                    <li><button type="button" ng-click="gotoAnchor('files')" class="btn btn-link">Related Files</button></li>
+                  <li><button type="button" ng-click="gotoAnchor('comments')" class="btn btn-link">Comments</button></li>
+                </ul> 
+              </nav>
+          </div>
+        </div> 
+    
+      </div> <!-- Sidebar Widgets Column -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+    <!-- Footer -->
+    <div id="nav-placeholder">
+        <div ng-include="'footer.html'"></div>
+    </div>
+
+    </div>
+    
+    <div id="pop-up">
+        <div ng-include="'Login&Register pop-up.html'"></div>
+    </div>
+    
+</div>
+<!-- div ng-app -->
+    
+<!-- Script -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
+  <script type="text/javascript" src="../assets/ng-tags-input.min.js"></script>
+  <script src="../app.js"></script>>
+  <script src="../controllers/project-detail.js"></script>
+  <script src="../controllers/nav.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js"></script>
+</body>
+
+</html>

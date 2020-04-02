@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Personal Settings</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <!-- <link href="../css/personalSettings.css" rel="stylesheet"> -->
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
+  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style>
+  .row-centered
+  {
+    text-align:center;
+  }
+  #preview {
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #preview:hover {opacity: 0.7;}
+
+  .nav-point {
+    cursor: pointer;
+  }
+
+  .nav-point:hover {
+    opacity: 0.7;
+  }
+  table td{
+
+    　　word-break:break-all;
+
+  }
+  </style>
+
+  <script>
+    var info = document.cookie;
+    if(info.indexOf("PHPSESSID")<0 || info.indexOf("userType=user")<0){
+      alert("Please Login Firstly!");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</head>
+
+<body id="page-top" ng-app="personalSettings" ng-controller="settingsCtrl">
+<!--<div id="nav-placeholder" class="mb-5">-->
+<!--  <div ng-include="'nav.html'"></div>-->
+<!--</div>-->
+  <!-- Page Wrapper -->
+  <div id="wrapper" >
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" ng-init='activeTab=1'>
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">IoT Project Hub<sup>CS26</sup></div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - My Profile -->
+      <li class="nav-item nav-point active" id="nav1">
+        <a href="" class="nav-link" ng-class="{ 'active' : data.current == 1 }" ng-click="actions.setCurrent(1)">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>My Profiles</span></a>
+      </li>
+      <!  -- Nav Item - My Account -->
+      <li class="nav-item nav-point" id="nav2">
+        <a href="" class="nav-link" ng-class="{ 'active' : data.current == 2 }" ng-click="actions.setCurrent(2)">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>My Account</span></a>
+      </li>
+      <!-- Nav Item - My Projects -->
+      <li class="nav-item nav-point" id="nav3">
+        <a href="" class="nav-link" ng-class="{ 'active' : data.current == 3 }" ng-click="actions.setCurrent(3)">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>My Projects</span></a>
+      </li>
+      <!-- Nav Item - My bookmark -->
+      <li class="nav-item nav-point" id="nav4">
+        <a href="" class="nav-link" ng-class="{ 'active' : data.current == 4 }" ng-click="actions.setCurrent(4)">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>My Bookmarks</span></a>
+      </li>
+      <!-- Nav Item - My followers -->
+      <li class="nav-item nav-point" id="nav5">
+        <a href="" class="nav-link" ng-class="{ 'active' : data.current == 5 }" ng-click="actions.setCurrent(5)">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>My Followers</span></a>
+      </li>
+      <!-- Nav Item - My followings -->
+      <li class="nav-item nav-point" id="nav6">
+        <a href="" class="nav-link" ng-class="{ 'active' : data.current == 6 }" ng-click="actions.setCurrent(6)">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>My Followings</span></a>
+      </li>
+
+
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+        <!-- Topbar -->
+        <div ng-controller="navCtrl" >
+          <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+              <i class="fa fa-bars"></i>
+            </button>
+            <div class="container" ng-init="checkLogin()">
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item d-none d-sm-inline-block form-inline" style="margin-top:auto;margin-bottom:auto;margin-right: 5px">
+                    <a href="explore.html"><input type="button" ng-click="" value="Explore" class="btn btn-outline-primary"></a>
+                  </li>
+                  <li class="nav-item d-none d-sm-inline-block form-inline" style="margin-top:auto;margin-bottom:auto;margin-right: 5px">
+                    <input type="button" ng-click="addProject($event)" value="Add Project" class="btn btn-outline-success">
+                  </li>
+                  <li class="nav-item d-none d-sm-inline-block form-inline" style="margin-top:auto;margin-bottom:auto;">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                      <div class="input-group">
+                        <input type="text" class="form-control bg-light border-1 border-secondary small" placeholder="Search for..." ng-model="keyword" ng-keyup="$event.keyCode == 13 && search(keyword)" aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" ng-click="search(keyword)">
+                            <i class="fas fa-search fa-sm"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </li>
+
+
+
+                  <!-- Nav Item - Function Dropdown (Visible Only XS) -->
+                  <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <!-- Dropdown - Buttons -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                      <a class="dropdown-item" href="explore.html">
+                        <i class="text-gray-400"></i>
+                        Explore
+                      </a>
+                      <a class="dropdown-item" href="upload-project.html">
+                        <i class="text-gray-400"></i>
+                        Add Project
+                      </a>
+                    </div>
+                  </li>
+
+                  <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                  <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-search fa-fw"></i>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                      <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                          <input type="text" class="form-control bg-light border-1 border-secondary small" placeholder="Search for..." ng-model="keyword" ng-keyup="$event.keyCode == 13 && search(keyword)" aria-label="Search" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" ng-click="search(keyword)">
+                              <i class="fas fa-search fa-sm"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </li>
+                  <!-- Nav Item - User Information -->
+                  <li class="nav-item dropdown no-arrow" ng-show='login'>
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img class="img-profile rounded-circle" ng-src="{{picSrc || 'https://image.flaticon.com/icons/svg/554/554846.svg'}}" onerror="this.src='https://image.flaticon.com/icons/svg/554/554846.svg'">
+                      <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{userName}}</span>
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" href="#" ng-click="viewProfile()">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Account
+                      </a>
+                      <a class="dropdown-item" href="personalSettings.html">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Settings
+                      </a>
+                      <!--                <a class="dropdown-item" href="#">-->
+                      <!--                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>-->
+                      <!--                  Activity Log-->
+                      <!--                </a>-->
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" ng-click="Logout()">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                      </a>
+                    </div>
+                  </li>
+
+
+                </ul>
+              </div>
+            </div>
+
+          </nav>
+        </div>
+        <!-- End of Topbar -->
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+        <!-- ========================== My Profile Tab ============================ -->
+        <div ng-if="data.current == 1" >
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">My Profiles</h6>
+            </div>
+
+            <div class="card-body">
+              <form class="user" id="myProfiles">
+                <div class="form-group row row-centered">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-6">
+                      <img id="preview" class="ml-3 my-3 img-fluid rounded-circle" ng-src="{{picSrc}}" style="width:180px;height:180px" onclick="input_file.click()">
+                      <input class="btn-primary btn-user" type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this)" style="display: none">
+                    <p>Click the picture to change icon</p>
+                  </div>
+<!--                  <div>-->
+<!--                    <p>Please click the picture to change icon</p>-->
+<!--                  </div>-->
+
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="nick_name" placeholder="Nick Name" ng-value="nickname">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-3" >
+                    <input type="text" class="form-control form-control-user" id="job" placeholder="Job"  ng-value="job">
+                  </div>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control form-control-user" id="location" placeholder="Location"  ng-value="location">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-6">
+                    <input type="email" class="form-control form-control-user" id="public_email" placeholder="Public Email"  ng-model="publicEmail">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-6">
+                    <input type="date" class="form-control form-control-user" id="birthday" ng-model="birthday">
+                  </div>
+                </div>
+
+              <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-6">
+                    <textarea id="personal_description" class="form-control form-control-user" style="resize: none;"placeholder="Personal Description">{{introduction}}</textarea>
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3"></div><div class="col-sm-3" >
+                  <a href="#" class="btn btn-primary btn-user btn-block" ng-click="saveProfile()">
+                    Save
+                  </a>
+                </div>
+                <div class="col-sm-3" >
+                  <a href="#" class="btn btn-danger btn-user btn-block" ng-click="resetProfile()">
+                    Cancel
+                  </a>
+                </div>
+              </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+            <!-- ========================== My Account Page ============================ -->
+
+        <div ng-if="data.current == 2">
+          <div class="card shadow mb-4">
+
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Change Email</h6>
+            </div>
+            <div class="card-body">
+              <form class="user" id="changeEmail">
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-6">
+                    <input type="email" class="form-control form-control-user" id="email" placeholder="Email" ng-value="email">
+                    <span id="email_status"  style="color:red"></span>
+                  </div>
+                </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3" >
+                  <a href="#" class="btn btn-primary btn-user btn-block" ng-click="updateEmail()">
+                    Save
+                  </a>
+                </div>
+                <div class="col-sm-3" >
+                  <a href="#" class="btn btn-danger btn-user btn-block" ng-click="clearEmailInput()">
+                    Cancel
+                  </a>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Change Password</h6>
+            </div>
+            <div class="card-body">
+              <form class="user" id = "changePassword">
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-6">
+                    <input type="password" class="form-control form-control-user" id="password" placeholder="Present Password" onchange="clearPwdSpan()">
+                    <span id="pre_pass_status" style="color:red"></span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-6">
+                    <input type="password" class="form-control form-control-user" id="newPassword" placeholder="New Password" maxlength="20" onchange="checkNewPwd()">
+                    <span id="new_pass_status" style="color:red"></span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-6">
+                    <input type="password" class="form-control form-control-user" id="confirmPassword" placeholder="Confirm Password" onchange="confirmPwd()">
+                    <span id="confirm_pass_status" style="color:red"></span>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3"></div><div class="col-sm-3" >
+                    <a href="#" class="btn btn-primary btn-user btn-block" ng-click="updatePwd()">
+                      Save
+                    </a>
+                  </div>
+                  <div class="col-sm-3" >
+                    <a href="#" class="btn btn-danger btn-user btn-block" ng-click="clearPwdInput()">
+                      Cancel
+                    </a>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================== My Projects Tab ============================ -->
+
+
+        <div ng-if="data.current == 3">
+          <!-- DataTales -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">My Projects</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <!-- if need more funtion, just change table id to dataTable -->
+                <table class="table table-bordered" id="projectTable" width="100%" cellspacing="0" style="text-align:center; vertical-align: middle">
+                  <thead>
+                    <tr>
+                      <th>Thumbnail</th>
+                      <th>Title</th>
+                      <th>Last Edit Time</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                     <!-- track by $index -->
+                    <tr ng-repeat="project in allProjects" ng-model="allProjects" on-finish-render="ngRepeatFinished" id ={{project.id}}>
+                        <td style="text-align:center; vertical-align: middle"><img ng-src={{project.pictureURL}} style="width:200px;height:120px" onerror="this.src='http://placehold.it/200x120'"></td>
+                        <td style="text-align:center; vertical-align: middle"> <a href="" ng-click = "getBookmarksDetail(project.id)">{{project.projectName}}</a> </td>
+                        <td style="text-align:center; vertical-align: middle">{{project.uploadTime}}</td>
+                        <td style="text-align:center; vertical-align: middle">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <button class="btn btn-primary btn-user btn-block" type="button" ng-click = "editProject(project.id)" style="width: 100%;">Edit</button>
+<!--                        </div>-->
+<!--                        <div class="col-sm-6">-->
+                        <button class="btn btn-primary btn-danger btn-block" type="button" ng-click = "deleteProject(project.id)" style="width: 100%;">Delete</button>
+                        </div>
+                        </div>
+                        </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ========================== My Bookmarks Tab ============================ -->
+
+
+        <div ng-if="data.current == 4">
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">My Bookmarks</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <!-- if need more funtion, just change table id to dataTable -->
+                <table class="table table-bordered" id="bookmarksTable" width="100%" cellspacing="0" style="text-align:center; vertical-align: middle">
+                  <thead>
+                    <tr>
+                      <th>Thumbnail</th>
+                      <th>Title</th>
+                      <th>Author</th>
+<!--                      <th>Last Edit Time</th>-->
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr ng-repeat="project in bookmarkList" ng-model="bookmarkList" on-finish-render="ngRepeatFinished" name = "{{project.id}}">
+                        <td style="text-align:center; vertical-align: middle">  <img ng-src={{project.pictureURL}} style="width:200px;height:120px" onerror="this.src='http://placehold.it/200x120'"></td>
+                        <td style="text-align:center; vertical-align: middle">{{project.projectName}}</td>
+                      <td style="text-align:center; vertical-align: middle">{{project.nickname}}</td>
+<!--                        <td>{{project.uploadTime}}</td>-->
+                        <td style="text-align:center; vertical-align: middle">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <button class="btn btn-primary btn-user btn-block" type="button" ng-click = "getBookmarksDetail(project.id)" style="width: 100%;">View</button>
+<!--                        </div>-->
+<!--                        <div class="col-sm-6">-->
+                        <button class="btn btn-primary btn-danger btn-block" type="button" ng-click = "deleteBookmark(project.id)" style="width: 100%;">Delete</button>
+                        </div>
+                        </div>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ========================== My Followers Tab ============================ -->
+
+
+        <div ng-if="data.current == 5">
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">My Followers</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <!-- if need more funtion, just change table id to dataTable -->
+
+                <table class="table table-bordered row-centered" id="followerTable" width="100%" cellspacing="0" style="text-align:center; vertical-align: middle">
+                  <thead>
+                    <tr>
+                      <th>Icon</th>
+                      <th>Nick Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr ng-repeat="user in followerList" ng-model="followerList" on-finish-render="ngRepeatFinished">
+                        <td style="text-align:center; vertical-align: middle">  <img class="img-profile rounded-circle"style="width:60px;height:60px" ng-src="{{user.profile_pic}}"></td>
+                        <td style="text-align:center; vertical-align: middle">{{user.nickname}}</td>
+                        <td style="text-align:center; vertical-align: middle">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <button class="btn btn-primary btn-user btn-block" type="button" ng-click = "viewFollower(user.id)">View</button>
+                        </div>
+                        </div>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ========================== My Following Tab ============================ -->
+
+
+        <div ng-if="data.current == 6">
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">My Followings</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <!-- if need more funtion, just change table id to dataTable -->
+
+                <table class="table table-bordered row-centered" id="followingTable" width="100%" cellspacing="0" style="text-align:center; vertical-align: middle">
+                  <thead>
+                    <tr>
+                      <th>Icon</th>
+                      <th>Nick Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr ng-repeat="user in followingList" ng-model="followingList" on-finish-render="ngRepeatFinished">
+                        <td style="text-align:center; vertical-align: middle">  <img class="img-profile rounded-circle" style="width:60px;height:60px" src={{user.profile_pic}}></td>
+                        <td style="text-align:center; vertical-align: middle">{{user.nickname}}</td>
+                        <td style="text-align:center; vertical-align: middle">
+                        <div class="row row-centered">
+                        <div class="col-sm-12" >
+                        <button class="btn btn-primary btn-user btn-block" type="button" ng-click = "viewFollowing(user.id)">View</button>
+                        </div>
+                        </div>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+          <!-- Page Heading -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Comp5703</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../js/sb-admin-2.min.js"></script>
+  <script src="../controllers/personal_settings.js"></script>
+  <script src="../controllers/nav.js"></script>
+
+  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+
+</body>
+
+</html>
